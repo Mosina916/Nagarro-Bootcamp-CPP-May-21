@@ -22,10 +22,11 @@ int main(){
 
 	// sorting algorithm-->insertion sort
 	int j;
+	int current;
 
 
 	for(int i=1;i<=n-1;i++){ // 5-->0 4-->1 1-->2 3-->3 2-->4
-		int current=arr[i];
+		current=arr[i];
 
 		for(j=i-1;j>=0&&arr[j]>current;j--){
 			// IF()
@@ -38,6 +39,14 @@ int main(){
 		}
 		arr[j+1]=current;
 	}
+
+	// int A=a;
+	// int B=b;
+	// A=A^B;  a^b;
+	// B=B^A; b^(a^b)=a;
+	// A=A^B; (a^b)^a
+
+
 
 
 

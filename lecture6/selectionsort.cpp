@@ -31,7 +31,17 @@ int main(){
 				
 			}
 		}
-		swap(arr[i],arr[min]);
+		// int a=a+b;
+		// int b=a-b;
+		// int a=a-b;
+
+		arr[i]=arr[i]+arr[min];
+		arr[min]=arr[i]-arr[min];
+		arr[i]=arr[i]-arr[min];
+
+
+
+		// swap(arr[i]-->a,arr[min]-->b);
 		
 	}
 
