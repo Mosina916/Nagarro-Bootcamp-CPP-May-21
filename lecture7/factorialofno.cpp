@@ -2,10 +2,12 @@
 #include<climits>
 using namespace std;
 
-int fact(int n){
-	int ans=1;
+int fact(int n){ //decleration
+
+	// definition
+	int ans=1; //n==4
 	for(int i=1;i<=n;i++){
-		ans=ans*i;
+		ans=ans*i; //24
 	}
 
 	// cout<<"factorial of "<<n<<" is "<<ans<<endl;
@@ -14,8 +16,8 @@ int fact(int n){
 }
 
 int ncr(int n,int r){
-	int ans=fact(n)/(fact(r)*fact(n-r));
-	return ans;
+	int finalans=fact(n)/(fact(r)*fact(n-r));
+	return finalans;
 
 }
 
