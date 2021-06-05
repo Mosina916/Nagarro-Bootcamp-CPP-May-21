@@ -19,7 +19,7 @@ void selectionsort(int arr[],int n){
 		// int b=a-b;
 		// int a=a-b;
 
-		// arr[i]=arr[i]+arr[min];
+		// arr[i]=arr[i]+arr[min]; 
 		// arr[min]=arr[i]-arr[min];
 		// arr[i]=arr[i]-arr[min];
 
