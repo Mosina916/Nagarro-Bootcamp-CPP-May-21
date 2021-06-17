@@ -24,6 +24,7 @@ int uniqueno3(int *arr,int n){
 
 	}
 
+
 	// for (int i = 0; i < 64; ++i)
 	// 	{
 	// 		cout<<freq[i]<<" ";
@@ -36,9 +37,11 @@ int uniqueno3(int *arr,int n){
 	for (int i = 0; i < 64; ++i)
 		{
 			freq[i]=freq[i]%3; //0
+
+			// binary to decimal
 			ans=ans+freq[i]*mul; //2
 
-			mul=mul*2; //8
+			mul=mul<<1; //8
 
 
 
