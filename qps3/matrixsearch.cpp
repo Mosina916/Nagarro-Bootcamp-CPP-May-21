@@ -12,7 +12,8 @@ void searchinmatrix(int arr[][1000],int rows,int cols,int target){
 		j++;
 	}
 	else if(arr[j][i]==target){
-		cout<<target<<" is present at index "<<j<<" "<<i<<endl;
+		// cout<<target<<" is present at index "<<j<<" "<<i<<endl;
+		cout<<1<<endl;
 		return; //exit
 
 	}
@@ -22,7 +23,8 @@ void searchinmatrix(int arr[][1000],int rows,int cols,int target){
 
 	}
 
-	cout<<target<<" is not present in matrix"<<endl;
+	// cout<<target<<" is not present in matrix"<<endl;
+	cout<<0<<endl;
 
 	
 }
