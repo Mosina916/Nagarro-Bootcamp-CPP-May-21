@@ -50,10 +50,6 @@ int sumofarrayelementsfrombackward(int *a,int n){ //4 5 8 n=3
 		return a[n-1];
 	}
 
-
-
-
-
 	// recursive case
 	return sumofarrayelementsfrombackward(a,n-1)+a[n-1];
 
