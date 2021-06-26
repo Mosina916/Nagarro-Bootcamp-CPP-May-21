@@ -48,6 +48,7 @@ void printallindices(int* arr,int n,int i){ //1 7 2 3 7  n=5,i=5
 
 int main(){
 	int n;
+	
 	cin>>n;
 	int arr[100];
 	for (int i = 0; i < n; ++i)

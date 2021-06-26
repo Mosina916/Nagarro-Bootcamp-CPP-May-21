@@ -27,7 +27,6 @@ void bubblesortrecursion(int *arr,int n,int i){
 
 // i=0,j=0,arr={5,4,3,2,1};,n=5
 void bubblesortpurerecursion(int *arr,int n,int i,int j){ 
-
 	// base case
 	if(i==n-1){
 		return;
@@ -45,8 +44,6 @@ void bubblesortpurerecursion(int *arr,int n,int i,int j){
 			bubblesortpurerecursion(arr,n,i,j+1);
 
 	}
-
-
 }
 int main(){
 	// int arr[5]={5,4,3,2,1};
