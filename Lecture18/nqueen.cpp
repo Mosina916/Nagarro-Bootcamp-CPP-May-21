@@ -104,6 +104,12 @@ int main(){
 	cout<<endl;
 
 	cout<<"Total patterns "<<co<<endl;
+	if(co>0){
+
+	}
+	else{
+		
+	}
 
 
 
