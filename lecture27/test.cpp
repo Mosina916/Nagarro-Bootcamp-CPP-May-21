@@ -160,221 +160,148 @@ node* buildbst(){
 
 
 }
-class Linkedlist{
-public:
-	node*head;
-	node*tail;
-	// constructor
-	Linkedlist(){
-		head=tail=NULL;
-	}
-};
-Linkedlist Bsttoll(node*root){
-	Linkedlist l; //l is obejct of type linkedlist
+
+// search in bst
+bool searchinbst(node*root,int key){
+
 	// base case
 	if(root==NULL){
-		return l;
-
+		return false;
 	}
+
 
 	// recursive case
-	// case 1 if both lst and rst are null
-	if(root->left==NULL&&root->right==NULL){
-		l.head=root;
-		l.tail=root;
-		// return l;
+	if(key==root->data){
+		return true;
 	}
-	//  case 2 
-	// lst exist and rst doesnot exist 
-	else if(root->left!=NULL&&root->right==NULL){
-		Linkedlist left= Bsttoll(root->left);
-		left.tail->right=root;
-		l.head=left.head;
-		l.tail=root;
-		// return l;
+	else if(key<root->data){
+		return searchinbst(root->left,key);
 	}
-	//case 3
-	// lst does exist and rst  exist 
-	else if(root->left==NULL&&root->right!=NULL){
-		Linkedlist right= Bsttoll(root->right);
-		root->right=right.head;
-		l.head=root;
-		l.tail=right.tail;
-		// return l;
-	}
-	// case 4 both lst and rst exist
 	else{
-		Linkedlist left=Bsttoll(root->left);//1 3 4 6 7
-		Linkedlist right=Bsttoll(root->right);//10 13 14
-		left.tail->right=root;
-		root->right=right.head;
-		l.head=left.head;
-
-		l.tail=right.tail;
-		// return l;
+		return searchinbst(root->right,key);
 	}
-	return l;
-
-
-
 }
-void printll(node*head){
-	while(head!=NULL){
-		cout<<head->data<<"->";
-		head=head->right;
 
-	}
-	cout<<"NULL ";
-
-}
-node* Deleteinbst(node*root,int key){
+void printrange(node*root,int k1,int k2){
 	// base case
 	if(root==NULL){
+		return ;
+	}
+
+
+	// recursive case
+	printrange(root->left,k1,k2);//lst
+	if(root->data>=k1&&root->data<=k2){ //root
+		cout<<root->data<<" ";
+	}
+	printrange(root->right,k1,k2); //rst
+}
+void printrangereverse(node*root,int k1,int k2){
+	// base case
+	if(root==NULL){
+		return ;
+	}
+
+
+	// recursive case
+	printrangereverse(root->right,k1,k2); //rst
+	
+	if(root->data>=k1&&root->data<=k2){ //root
+		cout<<root->data<<" ";
+	}
+	printrangereverse(root->left,k1,k2);//lst
+	
+}
+
+
+bool isbst(node*root,int min=INT_MIN,int max=INT_MAX){
+	// base case
+	if(root==NULL){//null tree is also a bst
+		return true;
+	}
+
+
+	// recursive case
+	if(root->data>=min&&root->data<=max&&isbst(root->left,min,root->data)&&isbst(root->right,root->data,max)){
+		return true;
+	}
+	else{
+		return false;
+	}
+
+}
+
+class Pair{
+public:
+	int height;
+	bool balance;
+	// constructor
+	Pair(){
+		height=0;
+		balance=true;
+	}
+};
+Pair isbalanced(node*root){
+	Pair p;
+	// base case
+	if(root==NULL){
+		// p.height=0;
+		// p.balance=true;
+		return p;
+
+	}
+
+
+
+	 // recursive case
+	Pair left=isbalanced(root->left);
+	Pair right=isbalanced(root->right);
+	p.height=max(left.height,right.height)+1;
+	if(left.balance==true&&right.balance==true&&(abs(left.height-right.height)<=1)){
+		p.balance=true;
+	}
+	else{
+		p.balance=false;
+	}
+	return p;
+
+}
+
+node* buildbstfromarr(int *arr,int s,int e){
+	// base case
+	if(s>e){
 		return NULL;
 	}
 
-	// recursive case
-	// case 1 key lst
-	if(root->data>key){
-		root->left=Deleteinbst(root->left,key);
-		return root;
-	}
-	// case 2 key rst
-	else if(root->data<key){
-		root->right=Deleteinbst(root->right,key);
-		return root;
-
-	}
-	// case 3 agar wo root khud key hogi
-	else{
-		// case 1 no child
-		if(root->left==NULL&&root->right==NULL){
-			delete root;
-			return NULL;
-		}
-
-		// case 2 1 child
-		//rc
-		else if(root->left==NULL&&root->right!=NULL){
-			node*temp=root->right;
-			delete root;
-			return temp;
-
-		}
-
-
-		// lc
-		else if(root->left!=NULL&&root->right==NULL){
-			node*temp=root->left;
-			delete root;
-			return temp;
-
-		}
-
-
-		//case 3 both child exist
-		// agar min se replace karna hai tou ye
-		else{
-			node*replace=root->right;
-			while(replace->left!=NULL){
-				replace=replace->left;
-			}
-			swap(replace->data,root->data);
-			root->right=Deleteinbst(root->right,key);
-			return root;
-
-		}
-
-		// agar max se replace karna hai 
-		// else{
-		// 	node*replace=root->left;
-		// 	while(replace->right!=NULL){
-		// 		replace=replace->right;
-		// 	}
-		// 	swap(replace->data,root->data);
-		// 	root->left=Deleteinbst(root->left,key);
-		// 	return root;
-
-		// }
-	}
-
-
-}
-void rightview(node*root,int level,int &maxlevel){
-	// base case
-	if(root==NULL){
-		return;
-	}
-
 
 
 	// recursive case
-	if(level>maxlevel){
-		cout<<root->data<<" ";
-		maxlevel=level;
+	int mid=(s+e)/2;
+	node*root=new node(arr[mid]);
+	root->left=buildbstfromarr(arr,s,mid-1);
+	root->right=buildbstfromarr(arr,mid+1,e);
+	return root;
 
-	}
-	rightview(root->right,level+1,maxlevel);
-	rightview(root->left,level+1,maxlevel);
+
 
 }
-
-void leftview(node*root,int level,int &maxlevel){
-	// base case
-	if(root==NULL){
-		return;
-	}
-
-
-
-	// recursive case
-	if(level>maxlevel){
-		cout<<root->data<<" ";
-		maxlevel=level;
-
-	}
-	
-	leftview(root->left,level+1,maxlevel);
-	leftview(root->right,level+1,maxlevel);
-
-}
-
-
 
 
 //input-->8 3 1 -1 -1 6 4 -1 -1 7 -1 -1 10 -1 14 13 -1 -1 -1
 int main(){
+	int arr[]={1,2,3,4,8,9,10};
+	int n=sizeof(arr)/sizeof(int);
+	node*parent=buildbstfromarr(arr,0,n-1);
 
 
 
-	node* parent=buildbst();
-	printlevelwise(parent);
-	int maxlevel=0;
-	rightview(parent,1,maxlevel);
-	int ml=0;
-	cout<<endl;
-	leftview(parent,1,ml);
-	cout<<endl;
-	// Linkedlist f=Bsttoll(parent);
+	// node* parent=buildbst();
 
-	// printll(f.head);
-	// inorder(parent);
-	// cout<<endl;
-
-
-	// parent=Deleteinbst(parent,3);
-	// printlevelwise(parent);
-	// inorder(parent);
-
-	// // Linkedlist q=Bsttoll(parent);
-
-	// // printll(q.head);
-	// cout<<endl;
-
-
-
-	// cout<<"preorder : ";
-	// preorder(parent);
+	
+	// // node*parent=buildtree();
+	// // node*parent=buildtreelevelwise();
+	// // cout<<"preorder : ";
+	// // preorder(parent);
 	// cout<<endl;
 	// cout<<"inorder : ";
 	// inorder(parent);
@@ -383,7 +310,36 @@ int main(){
 	// postorder(parent);
 	// cout<<endl;
 
-	
+	printlevelwise(parent);
+	// if(searchinbst(parent,13)){
+	// 	cout<<"key is present"<<endl;
+	// }
+	// else{
+	// 	cout<<"key is not present"<<endl;
+	// }
+
+	// // printrange(parent,7,13);
+	// // cout<<endl;
+	// // printrangereverse(parent,7,13);
+	// if(isbst(parent)){
+	// 	cout<<"it is a bst"<<endl;
+
+
+	// }
+	// else{
+	// 	cout<<"it is not a bst"<<endl;
+
+
+	// }
+
+	// Pair x=isbalanced(parent);
+	// if(x.balance){
+	// 	cout<<"tree is balanced"<<endl;
+	// }
+	// else{
+	// 	cout<<"tree is not balanced"<<endl;
+	// }
+	// cout<<"height of tree is "<<x.height<<endl;
 
 
 
